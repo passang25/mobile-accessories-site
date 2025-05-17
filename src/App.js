@@ -42,7 +42,7 @@ function Navbar() {
 function Home() {
   return (
     <div className="p-8 text-center">
-      <h2 className="text-3xl font-bold mb-4">Top Mobile Accessories</h2>
+      <h2 className="text-3xl font-bold mb-4">Top 10 Mobile Accessories</h2>
       <p>Discover the best gadgets and tools for your smartphone.</p>
     </div>
   );
