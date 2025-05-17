@@ -6,7 +6,7 @@ const products = [
     id: 1,
     name: "boAt Airdopes 311 Pro, 50HRS Battery, Fast Charge, Dual Mics ENx Tech, Transparent LID, Low Latency, IPX4, IWP Tech, v5.3 Bluetooth Earbuds, TWS Ear Buds Wireless Earphones with mic (Active Black)",
     description: "High-quality sound with long battery life.",
-    image: "https://via.placeholder.com/150",
+    image: "Boat.jpg",
     link: "https://amzn.to/4msdEun"
   },
   {
