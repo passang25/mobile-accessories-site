@@ -88,7 +88,7 @@ className="absolute top-2 left-2 text-black text-xl bg-black bg-opacity-50 p-2 r
 </button>
 </div>
 <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-<p className="mb-4">{product.description}</p>
+<i><p className="mb-4"style={{ color: 'green', fontStyle: 'italic' }}>{product.description}</p></i>
 <a
 href={product.link}
 target="_blank"
