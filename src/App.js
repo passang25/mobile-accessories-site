@@ -15,13 +15,13 @@ const products = [
     {
     id: 2,
     name: "IMNISHNAY Jellyfish Baby LED Night Light – 7-Color Changing Lamp for Kids, Baby Room Decor, Aesthetic Gifts for Girls, Boys , Friends & Ocean Lovers Night Lamps ( Hanging + Base ) (Jelly Fish)Brand: IMNISHNAY 4.0 4.0 out of 5 stars (540)",
-description: "M.R.P.: ₹1,999.   Inclusive of all taxes EMI starts at ₹127 per month.",
+description: "M.R.P.: ₹1,999. Inclusive of all taxes EMI starts at ₹127 per month.",
     video: "OctopusLamp.mp4",
     link: "https://www.amazon.in/dp/YOUR_AFFILIATE_ID_2"
   },
   {
     id: 3,
-    name: "Phone Stand",
+    name: "Phone Stand wow",
     description: "Adjustable desk stand for hands-free use.",
     video: "charger.mp4",
     link: "https://www.amazon.in/dp/YOUR_AFFILIATE_ID_2"
@@ -88,7 +88,7 @@ className="absolute top-2 left-2 text-black text-xl bg-black bg-opacity-50 p-2 r
 </button>
 </div>
 <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-<i><p className="mb-4"style={{ color: 'green', fontStyle: 'italic' }}>{product.description}</p></i>
+<i><p className="mb-4"style={{ color: 'green', fontStyle: 'font-semibold' }}>{product.description}</p></i>
 <a
 href={product.link}
 target="_blank"
