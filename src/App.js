@@ -2,13 +2,14 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import React, { useRef, useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { FaVolumeMute, FaVolumeUp } from "react-icons/fa";
+import './App.css';
 
 
 const products = [
   {
     id: 1,
     name: "boAt Airdopes 311 Pro, 50HRS Battery, Fast Charge, Dual Mics ENx Tech, Transparent LID, Low Latency, IPX4, IWP Tech, v5.3 Bluetooth Earbuds, TWS Ear Buds Wireless Earphones with mic (Active Black)",
-    description: "High-quality sound with long battery life.",
+    description: "High-quality Best sound with long battery life.",
     video: "boat.mp4",
     link: "https://amzn.to/4msdEun"
   },
