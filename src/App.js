@@ -14,42 +14,54 @@ const products = [
     discountPercent: 84,
     ratingCount: 3900,
     link: "https://amzn.to/4msdEun",
-    rating: 4
+    rating: 5
   },
   {
     id: 2,
     name: "IMNISHNAY Jellyfish Baby LED Night Light...",
-    description: "M.R.P.: ₹1,999. Inclusive of all taxes EMI starts at ₹127 per month.",
+    description: "Inclusive of all taxes EMI starts at ₹127 per month.",
     video: "OctopusLamp.mp4",
-    price: 799,
-    mrp: 4990,
-    discountPercent: 84,
+    price: 1199,
+    mrp: 1999,
+    discountPercent: 40,
     ratingCount: 3900,
-    link: "https://www.amazon.in/dp/YOUR_AFFILIATE_ID_2",
+    link: "https://amzn.to/4dtP1co",
     rating: 4
   },
   {
     id: 3,
-    name: "Phone Stand wow",
-    description: "Adjustable desk stand for hands-free use.",
-    video: "charger.mp4",
-    price: 799,
-    mrp: 4990,
-    discountPercent: 84,
+    name: "WaterScience Tap Extension for Kitchen Sink | 2 Flow Modes | Flexible Faucet Extender for Taps | Aerators for Water Tap | Upto 50% Water Saving - Flexi Neck.",
+    description: "2 flow modes - Rain mode & Foam mode to switch between a standard flow and a reduced flow in the kitchen.",
+    video: "TapExtender.mp4",
+    price: 495,
+    mrp: 995,
+    discountPercent: 50,
     ratingCount: 3900,
-    link: "https://www.amazon.in/dp/YOUR_AFFILIATE_ID_2",
-    rating: 4
+    link: "https://amzn.to/4myuVlv",
+    rating: 5
   },
   {
     id: 4,
-    name: "Fast Charger",
-    description: "Quick charge adapter with dual ports.",
-    video: "stand.mp4",
-    price: 799,
-    mrp: 4990,
-    discountPercent: 84,
+    name: "Desidiya DIY 3D Acrylic Writing Board with Pen & Light Table Lamp | Led Writing Table Lamp for Kids Corded Electric Home & Office Decor Items, Gift, Bedside Night Light.",
+    description: "EYE-CARING LED - The lamp's LED lights emit a soft, flicker-free glow that reduces eye strain and fatigue, making it perfect for extended reading, writing, or working sessions.",
+    video: "LedPad.mp4",
+    price: 249,
+    mrp: 1699,
+    discountPercent: 85,
     ratingCount: 3900,
-    link: "https://www.amazon.in/dp/YOUR_AFFILIATE_ID_3",
+    link: "https://amzn.to/44P7LRx",
+    rating: 5
+  },
+    {
+    id: 5,
+    name: "The Artment your artistic apartment Rubber TerraDry Stone Bathroom Diatomaceous Earth Shower Mat, Non-Slip Super Absorbent Quick Drying Bathroom Mat | Natural, Easy to Clean(35 X 45 CM)Rectangular.",
+    description: "Super Absorbent>>Non-Slip Design>>Quick Drying>>Easy to Clean>>Stylish and Functional>>              Simply wipe or rinse the mat to maintain its pristine condition, saving you time and effort on maintenance.",
+    video: "BathMat.mp4",
+    price: 908,
+    mrp: 1524,
+    discountPercent: 40,
+    ratingCount: 3900,
+    link: "https://amzn.to/4kfaKHM",
     rating: 4
   }
 ];
@@ -177,14 +189,14 @@ function ProductCard({ product, isActive, onActivate }) {
           <div className="text-sm text-gray-700 mt-1">
             <span className="inline-flex items-center space-x-1">
               <span className="bg-gray-700 text-white text-xs px-2 py-0.5 rounded">
-                Fulfilled
+                Amazon
               </span>
               <span>Inclusive of all taxes</span>
             </span>
           </div>
         </div>
 
-        <p className="mb-4 mt-2" style={{ color: "green" }}>{product.description}</p>
+        <i><b><p className="mb-4 mt-2" style={{ color: "green" }}>{product.description}</p></b></i>
 
         <a
           href={product.link}
