@@ -4,6 +4,9 @@
 .App {
   text-align: center;
 }
+body{
+  font-style: italic;
+}
 
 .App-logo {
   height: 40vmin;

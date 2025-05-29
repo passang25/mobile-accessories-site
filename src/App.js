@@ -2,6 +2,13 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import React, { useRef, useState, useEffect } from "react";
 import { FaPlay, FaPause, FaVolumeMute, FaVolumeUp } from "react-icons/fa";
 import './App.css';
+import { FaMobileAlt, FaTools, FaUserFriends } from "react-icons/fa";
+import { FaEnvelope, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { Menu, X } from "lucide-react"; // optional: install `lucide-react` for icons
+import { HomeIcon, Box, Info, Phone } from "lucide-react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+
 
 const products = [
   {
@@ -66,10 +73,10 @@ const products = [
   }
 ];
 
-function Navbar() {
+/* function Navbar() {
   return (
     <nav className="bg-gray-800 text-white p-4 flex justify-between">
-      <h1 className="text-xl font-bold">Mobile Accessories</h1>
+      <i><h1 className="text-xl font-bold">Amazon Associate.in</h1></i>
       <div className="space-x-4">
         <Link to="/" className="hover:text-gray-300">Home</Link>
         <Link to="/products" className="hover:text-gray-300">Products</Link>
@@ -79,15 +86,279 @@ function Navbar() {
     </nav>
   );
 }
+*/
 
-function Home() {
+/*
+function Navbar() {
   return (
-    <div className="p-8 text-center">
-      <h2 className="text-3xl font-bold mb-4">Top 10 Mobile Accessories</h2>
-      <p>Discover the best gadgets and tools for your smartphone.</p>
-    </div>
+    <nav className="bg-gray-800 text-white p-4 flex justify-between sticky top-0 z-50 shadow-md">
+      <i><h1 className="text-xl font-bold">Amazon Associate.in</h1></i>
+      <div className="space-x-4">
+        <Link to="/" className="hover:text-gray-300">Home</Link>
+        <Link to="/products" className="hover:text-gray-300">Products</Link>
+        <Link to="/about" className="hover:text-gray-300">About</Link>
+        <Link to="/contact" className="hover:text-gray-300">Contact</Link>
+      </div>
+    </nav>
   );
 }
+*/
+
+/*
+function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <nav className="bg-gray-800 text-white sticky top-0 z-50 shadow-md">
+      <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+        <h1 className="text-xl font-bold">Amazon Associate.in</h1>
+
+       // { Desktop Links }
+        <div className="hidden md:flex space-x-6">
+          <Link to="/" className="hover:text-gray-300">Home</Link>
+          <Link to="/products" className="hover:text-gray-300">Products</Link>
+          <Link to="/about" className="hover:text-gray-300">About</Link>
+          <Link to="/contact" className="hover:text-gray-300">Contact</Link>
+        </div>
+
+      //  { Mobile Menu Button }
+        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden">
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+     // { Mobile Dropdown Menu }
+      {isOpen && (
+        <div className="md:hidden px-4 pb-4 space-y-2">
+          <Link to="/" className="block hover:text-gray-300">Home</Link>
+          <Link to="/products" className="block hover:text-gray-300">Products</Link>
+          <Link to="/about" className="block hover:text-gray-300">About</Link>
+          <Link to="/contact" className="block hover:text-gray-300">Contact</Link>
+        </div>
+      )}
+    </nav>
+  );
+}
+*/
+
+/*
+function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggle = () => setIsOpen(!isOpen);
+  const handleLinkClick = () => setIsOpen(false);
+
+  return (
+    <nav className="bg-gray-800 text-white p-4 sticky top-0 z-50">
+      <div className="flex justify-between items-center">
+        <h1 className="text-xl font-bold">Amazon Associate.in</h1>
+
+        <div className="md:hidden">
+          <button onClick={handleToggle}>
+            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
+        </div>
+
+       // { Desktop menu }
+        <div className="hidden md:flex space-x-4">
+          <Link to="/" onClick={handleLinkClick} className="hover:text-gray-300">Home</Link>
+          <Link to="/products" onClick={handleLinkClick} className="hover:text-gray-300">Products</Link>
+          <Link to="/about" onClick={handleLinkClick} className="hover:text-gray-300">About</Link>
+          <Link to="/contact" onClick={handleLinkClick} className="hover:text-gray-300">Contact</Link>
+        </div>
+      </div>
+
+// { Animated mobile menu }
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden flex flex-col mt-2 space-y-2"
+          >
+            <Link to="/" onClick={handleLinkClick} className="hover:text-gray-300">Home</Link>
+            <Link to="/products" onClick={handleLinkClick} className="hover:text-gray-300">Products</Link>
+            <Link to="/about" onClick={handleLinkClick} className="hover:text-gray-300">About</Link>
+            <Link to="/contact" onClick={handleLinkClick} className="hover:text-gray-300">Contact</Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  );
+}
+*/
+
+/*
+function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleLinkClick = () => {
+    setIsOpen(false); // Close menu after click
+  };
+
+  return (
+    <nav className="bg-gray-800 text-white p-4 sticky top-0 z-50">
+      <div className="flex justify-between items-center">
+        <h1 className="text-xl font-bold">Amazon Associate.in</h1>
+
+        //{ Menu icon }
+        <div className="md:hidden">
+          <button onClick={handleToggle}>
+            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
+        </div>
+
+       // { Desktop nav }
+        <div className="hidden md:flex space-x-4">
+          <Link to="/" onClick={handleLinkClick} className="hover:text-gray-300">Home</Link>
+          <Link to="/products" onClick={handleLinkClick} className="hover:text-gray-300">Products</Link>
+          <Link to="/about" onClick={handleLinkClick} className="hover:text-gray-300">About</Link>
+          <Link to="/contact" onClick={handleLinkClick} className="hover:text-gray-300">Contact</Link>
+        </div>
+      </div>
+
+    // { Mobile nav dropdown }
+      {isOpen && (
+        <div className="md:hidden flex flex-col mt-2 space-y-2">
+          <Link to="/" onClick={handleLinkClick} className="hover:text-gray-300">Home</Link>
+          <Link to="/products" onClick={handleLinkClick} className="hover:text-gray-300">Products</Link>
+          <Link to="/about" onClick={handleLinkClick} className="hover:text-gray-300">About</Link>
+          <Link to="/contact" onClick={handleLinkClick} className="hover:text-gray-300">Contact</Link>
+        </div>
+      )}
+    </nav>
+  );
+}
+*/
+
+
+function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggle = () => setIsOpen(!isOpen);
+  const handleLinkClick = () => setIsOpen(false);
+
+  return (
+    <>
+      {/* Fixed Menu Icon */}
+      <div className="fixed top-4 right-4 z-50 md:hidden bg-gray-800 p-2 rounded-full shadow-lg">
+        <button onClick={handleToggle} className="text-white">
+          {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        </button>
+      </div>
+
+      {/* Normal Desktop Navbar */}
+      <nav className="bg-gray-800 text-white p-4">
+        <div className="flex justify-between items-center">
+          <h1 className="text-xl font-bold">Amazon Associate.in</h1>
+
+          <div className="hidden md:flex space-x-4">
+            <Link to="/" className="hover:text-gray-300">Home</Link>
+            <Link to="/products" className="hover:text-gray-300">Products</Link>
+            <Link to="/about" className="hover:text-gray-300">About</Link>
+            <Link to="/contact" className="hover:text-gray-300">Contact</Link>
+          </div>
+        </div>
+      </nav>
+
+      {/* Slide-in Side Menu for Mobile */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ type: "tween", duration: 0.3 }}
+            className="fixed top-0 left-0 h-full w-3/4 bg-black bg-opacity-50 text-white z-40 flex flex-col p-6 space-y-4 md:hidden shadow-xl text-center font-bold text-2xl"
+          >
+            <Link to="/" onClick={handleLinkClick} 
+className="hover:text-gray-300">🛖 Home
+  </Link>
+            
+            <Link to="/products" onClick={handleLinkClick} 
+className="hover:text-gray-300">📦 Product  
+            </Link>
+            
+            <Link to="/about" onClick={handleLinkClick} className="hover:text-gray-300">❕About</Link>
+            <Link to="/contact" onClick={handleLinkClick} className="hover:text-gray-300">📞 Contact</Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
+
+
+
+function Home() {
+  return (
+    <div className="p-8 text-center bg-gradient-to-r from-yellow-50 to-orange-100 min-h-screen">
+      <div className="max-w-4xl mx-auto py-10">
+        <h2 className="text-4xl font-bold mb-4 text-gray-800">
+          Top Amazon Picks Just for You!
+        </h2>
+        <p className="text-lg text-gray-700 mb-6">
+          Save big on trending tech & home gadgets. Handpicked deals with <span className="font-semibold text-green-600">up to 85% off!</span>
+        </p>
+        <Link
+          to="/products"
+          className="bg-blue-600 text-white px-6 py-3 rounded-full text-lg hover:bg-blue-700 transition"
+        >
+          Explore Products
+        </Link>
+      </div>
+
+      {/* Highlight 3 products visually */}
+      <div className="mt-10 grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {products.slice(0, 3).map((product) => (
+          <div
+            key={product.id}
+            className="border rounded-lg p-4 bg-white shadow hover:shadow-lg transition duration-300"
+          >
+            <video
+              src={`/videos/${product.video}`}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-48 object-contain rounded"
+            />
+            <h3 className="mt-2 text-lg font-semibold">{product.name}</h3>
+            <p className="text-sm text-gray-600">{product.description.slice(0, 60)}...</p>
+            <span className="text-red-600 font-bold text-lg block mt-1">
+              ₹{product.price} <span className="text-sm line-through text-gray-500">₹{product.mrp}</span>
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* Trust signals */}
+      <div className="mt-12 grid md:grid-cols-3 gap-4 max-w-4xl mx-auto text-gray-700">
+        <div className="p-4 border rounded-lg bg-white shadow text-center">
+          <h4 className="font-bold text-xl">Fast Delivery</h4>
+          <p className="text-sm">Get your products in 2-4 days via Amazon Prime.</p>
+        </div>
+        <div className="p-4 border rounded-lg bg-white shadow text-center">
+          <h4 className="font-bold text-xl">Up to 85% OFF</h4>
+          <p className="text-sm">Enjoy massive discounts on handpicked items.</p>
+        </div>
+        <div className="p-4 border rounded-lg bg-white shadow text-center">
+          <h4 className="font-bold text-xl">Amazon Verified</h4>
+          <p className="text-sm">All links redirect to trusted Amazon listings.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
 
 function ProductCard({ product, isActive, onActivate }) {
   const videoRef = useRef(null);
@@ -198,12 +469,14 @@ function ProductCard({ product, isActive, onActivate }) {
 
         <i><b><p className="mb-4 mt-2" style={{ color: "green" }}>{product.description}</p></b></i>
 
+        
         <a
-          href={product.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 inline-block"
+         href={product.link}
+         target="_blank"
+       rel="noopener noreferrer"
+     className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 inline-block"
         >
+         
           <b><i>Buy Now</i></b>
         </a>
       </div>
@@ -231,23 +504,75 @@ function Products() {
   );
 }
 
+
+
 function About() {
-  return (
-    <div className="p-8">
-      <h2 className="text-2xl font-bold mb-4">About Us</h2>
-      <p>We bring you the best mobile accessories to enhance your smartphone experience.</p>
-    </div>
-  );
+  return (
+    <div className="p-8 bg-gradient-to-br from-yellow-50 to-orange-100 min-h-screen">
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-4xl font-bold text-gray-800 mb-6">About Us</h2>
+        <p className="text-lg text-gray-700 mb-8">
+          We're passionate about showcasing top Amazon deals on unique tech and home gadgets. Our goal is to help you save money while discovering awesome products!
+        </p>
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="p-6 bg-white shadow rounded-lg flex flex-col items-center text-center">
+            <FaMobileAlt className="text-3xl text-blue-500 mb-2" />
+            <h4 className="font-bold text-xl mb-1">Mobile Accessories</h4>
+            <p className="text-sm text-gray-600">Only the best curated mobile gadgets that are affordable and reliable.</p>
+          </div>
+          <div className="p-6 bg-white shadow rounded-lg flex flex-col items-center text-center">
+            <FaTools className="text-3xl text-green-500 mb-2" />
+            <h4 className="font-bold text-xl mb-1">Smart Utilities</h4>
+            <p className="text-sm text-gray-600">Innovative tools and home improvements that make life easier.</p>
+          </div>
+          <div className="p-6 bg-white shadow rounded-lg flex flex-col items-center text-center">
+            <FaUserFriends className="text-3xl text-purple-500 mb-2" />
+            <h4 className="font-bold text-xl mb-1">Trusted Reviews</h4>
+            <p className="text-sm text-gray-600">Handpicked based on ratings, reviews & real customer satisfaction.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
+
+
+
+
+
 function Contact() {
-  return (
-    <div className="p-8">
-      <h2 className="text-2xl font-bold mb-4">Contact</h2>
-      <p>For inquiries, email us at: example@email.com</p>
-    </div>
-  );
+  return (
+    <div className="p-8 bg-gradient-to-br from-blue-50 to-cyan-100 min-h-screen">
+      <div className="max-w-xl mx-auto text-center">
+        <h2 className="text-4xl font-bold text-gray-800 mb-6">Get in Touch</h2>
+        <p className="text-lg text-gray-700 mb-8">
+          We’d love to hear from you! Whether it’s a query, feedback, or a collaboration idea — drop us a message.
+        </p>
+        <div className="space-y-4">
+          <div className="flex items-center justify-center gap-3">
+            <FaEnvelope className="text-xl text-red-500" />
+            <a href="mailto:outlookdeathless@email.com" className="text-gray-700 text-lg hover:underline">
+              outlookdeathless@email.com
+            </a>
+          </div>
+          <div className="flex items-center justify-center gap-3">
+            <FaInstagram className="text-xl text-pink-500" />
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="text-gray-700 text-lg hover:underline">
+@_https://www.instagram.com/night0__0owl?igsh=dGY3ZGk5MmdpNXpq
+            </a>
+          </div>
+          <div className="flex items-center justify-center gap-3">
+            <FaWhatsapp className="text-xl text-green-500" />
+            <span className="text-gray-700 text-lg">+91-9547104771</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
+
+
 
 function App() {
   return (
