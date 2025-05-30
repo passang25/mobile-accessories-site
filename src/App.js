@@ -8,6 +8,7 @@ import { Menu, X } from "lucide-react"; // optional: install `lucide-react` for 
 import { HomeIcon, Box, Info, Phone } from "lucide-react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { ImSpinner2 } from "react-icons/im"; // Spinner icon from react-icons
 
 
 const products = [
@@ -62,7 +63,7 @@ const products = [
     {
     id: 5,
     name: "The Artment your artistic apartment Rubber TerraDry Stone Bathroom Diatomaceous Earth Shower Mat, Non-Slip Super Absorbent Quick Drying Bathroom Mat | Natural, Easy to Clean(35 X 45 CM)Rectangular.",
-    description: "Super Absorbent>>Non-Slip Design>>Quick Drying>>Easy to Clean>>Stylish and Functional>>              Simply wipe or rinse the mat to maintain its pristine condition, saving you time and effort on maintenance.",
+    description: "Super Absorbent>>Non-Slip Design>>Quick Drying>>Easy to Clean>>Stylish and Functional.",
     video: "BathMat.mp4",
     price: 908,
     mrp: 1524,
@@ -73,169 +74,6 @@ const products = [
   }
 ];
 
-/* function Navbar() {
-  return (
-    <nav className="bg-gray-800 text-white p-4 flex justify-between">
-      <i><h1 className="text-xl font-bold">Amazon Associate.in</h1></i>
-      <div className="space-x-4">
-        <Link to="/" className="hover:text-gray-300">Home</Link>
-        <Link to="/products" className="hover:text-gray-300">Products</Link>
-        <Link to="/about" className="hover:text-gray-300">About</Link>
-        <Link to="/contact" className="hover:text-gray-300">Contact</Link>
-      </div>
-    </nav>
-  );
-}
-*/
-
-/*
-function Navbar() {
-  return (
-    <nav className="bg-gray-800 text-white p-4 flex justify-between sticky top-0 z-50 shadow-md">
-      <i><h1 className="text-xl font-bold">Amazon Associate.in</h1></i>
-      <div className="space-x-4">
-        <Link to="/" className="hover:text-gray-300">Home</Link>
-        <Link to="/products" className="hover:text-gray-300">Products</Link>
-        <Link to="/about" className="hover:text-gray-300">About</Link>
-        <Link to="/contact" className="hover:text-gray-300">Contact</Link>
-      </div>
-    </nav>
-  );
-}
-*/
-
-/*
-function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <nav className="bg-gray-800 text-white sticky top-0 z-50 shadow-md">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-        <h1 className="text-xl font-bold">Amazon Associate.in</h1>
-
-       // { Desktop Links }
-        <div className="hidden md:flex space-x-6">
-          <Link to="/" className="hover:text-gray-300">Home</Link>
-          <Link to="/products" className="hover:text-gray-300">Products</Link>
-          <Link to="/about" className="hover:text-gray-300">About</Link>
-          <Link to="/contact" className="hover:text-gray-300">Contact</Link>
-        </div>
-
-      //  { Mobile Menu Button }
-        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden">
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-     // { Mobile Dropdown Menu }
-      {isOpen && (
-        <div className="md:hidden px-4 pb-4 space-y-2">
-          <Link to="/" className="block hover:text-gray-300">Home</Link>
-          <Link to="/products" className="block hover:text-gray-300">Products</Link>
-          <Link to="/about" className="block hover:text-gray-300">About</Link>
-          <Link to="/contact" className="block hover:text-gray-300">Contact</Link>
-        </div>
-      )}
-    </nav>
-  );
-}
-*/
-
-/*
-function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleToggle = () => setIsOpen(!isOpen);
-  const handleLinkClick = () => setIsOpen(false);
-
-  return (
-    <nav className="bg-gray-800 text-white p-4 sticky top-0 z-50">
-      <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold">Amazon Associate.in</h1>
-
-        <div className="md:hidden">
-          <button onClick={handleToggle}>
-            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-          </button>
-        </div>
-
-       // { Desktop menu }
-        <div className="hidden md:flex space-x-4">
-          <Link to="/" onClick={handleLinkClick} className="hover:text-gray-300">Home</Link>
-          <Link to="/products" onClick={handleLinkClick} className="hover:text-gray-300">Products</Link>
-          <Link to="/about" onClick={handleLinkClick} className="hover:text-gray-300">About</Link>
-          <Link to="/contact" onClick={handleLinkClick} className="hover:text-gray-300">Contact</Link>
-        </div>
-      </div>
-
-// { Animated mobile menu }
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden flex flex-col mt-2 space-y-2"
-          >
-            <Link to="/" onClick={handleLinkClick} className="hover:text-gray-300">Home</Link>
-            <Link to="/products" onClick={handleLinkClick} className="hover:text-gray-300">Products</Link>
-            <Link to="/about" onClick={handleLinkClick} className="hover:text-gray-300">About</Link>
-            <Link to="/contact" onClick={handleLinkClick} className="hover:text-gray-300">Contact</Link>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
-  );
-}
-*/
-
-/*
-function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleLinkClick = () => {
-    setIsOpen(false); // Close menu after click
-  };
-
-  return (
-    <nav className="bg-gray-800 text-white p-4 sticky top-0 z-50">
-      <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold">Amazon Associate.in</h1>
-
-        //{ Menu icon }
-        <div className="md:hidden">
-          <button onClick={handleToggle}>
-            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-          </button>
-        </div>
-
-       // { Desktop nav }
-        <div className="hidden md:flex space-x-4">
-          <Link to="/" onClick={handleLinkClick} className="hover:text-gray-300">Home</Link>
-          <Link to="/products" onClick={handleLinkClick} className="hover:text-gray-300">Products</Link>
-          <Link to="/about" onClick={handleLinkClick} className="hover:text-gray-300">About</Link>
-          <Link to="/contact" onClick={handleLinkClick} className="hover:text-gray-300">Contact</Link>
-        </div>
-      </div>
-
-    // { Mobile nav dropdown }
-      {isOpen && (
-        <div className="md:hidden flex flex-col mt-2 space-y-2">
-          <Link to="/" onClick={handleLinkClick} className="hover:text-gray-300">Home</Link>
-          <Link to="/products" onClick={handleLinkClick} className="hover:text-gray-300">Products</Link>
-          <Link to="/about" onClick={handleLinkClick} className="hover:text-gray-300">About</Link>
-          <Link to="/contact" onClick={handleLinkClick} className="hover:text-gray-300">Contact</Link>
-        </div>
-      )}
-    </nav>
-  );
-}
-*/
 
 
 function Navbar() {
@@ -285,7 +123,7 @@ className="hover:text-gray-300">🛖 Home
 className="hover:text-gray-300">📦 Product  
             </Link>
             
-            <Link to="/about" onClick={handleLinkClick} className="hover:text-gray-300">❕About</Link>
+            <Link to="/about" onClick={handleLinkClick} className="hover:text-gray-300">❗About</Link>
             <Link to="/contact" onClick={handleLinkClick} className="hover:text-gray-300">📞 Contact</Link>
           </motion.div>
         )}
@@ -359,6 +197,7 @@ function Home() {
 }
 
 
+/*
 
 function ProductCard({ product, isActive, onActivate }) {
   const videoRef = useRef(null);
@@ -399,7 +238,7 @@ function ProductCard({ product, isActive, onActivate }) {
         <video
           ref={videoRef}
           src={`/videos/${product.video}`}
-          autoPlay
+          autoPlay = {!isActive}
           muted={!isActive}
           loop
           preload="metadata"
@@ -416,7 +255,8 @@ function ProductCard({ product, isActive, onActivate }) {
       <div className="mt-2">
         <h3 className="text-xl font-semibold leading-tight">{product.name}</h3>
 
-        {/* Star Rating */}
+      
+    // { Star Rating }
         <div className="flex items-center space-x-1 mt-1 mb-1">
           {[...Array(5)].map((_, i) => (
             <svg
@@ -438,7 +278,7 @@ function ProductCard({ product, isActive, onActivate }) {
           <span className="text-sm text-gray-600 ml-2">{product.rating}.0</span>
         </div>
 
-        {/* Discount Price Section */}
+      // { Discount Price Section }
         <div className="mt-2">
           <div className="inline-block bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded mb-1">
             Limited time deal
@@ -483,6 +323,140 @@ function ProductCard({ product, isActive, onActivate }) {
     </div>
   );
 }
+*/
+
+
+function ProductCard({ product, isActive, onActivate }) {
+ const videoRef = useRef(null);
+const [aspectRatio, setAspectRatio] = useState(9 / 16);
+ const [isVideoLoading, setIsVideoLoading] = useState(true); // 🔄 loading state
+
+ useEffect(() => {
+if (videoRef.current) {
+ videoRef.current.muted = !isActive;
+ }
+ }, [isActive]);
+
+ const toggleMute = () => {
+ onActivate();
+ };
+
+ useEffect(() => {
+ const video = videoRef.current;
+ const handleLoadedMetadata = () => {
+ const ratio = video.videoWidth / video.videoHeight;
+ setAspectRatio(ratio);
+ };
+if (video) {
+video.addEventListener("loadedmetadata", handleLoadedMetadata);
+}
+return () => {
+if (video) {
+video.removeEventListener("loadedmetadata", handleLoadedMetadata);
+ }
+ };
+ }, []);
+
+  return (
+    <div className="border rounded-lg p-4 shadow hover:shadow-lg relative">
+      <div
+        className="w-full bg-black overflow-hidden relative"
+style={{ aspectRatio: aspectRatio }}
+      >
+        {isVideoLoading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 z-20">
+            <ImSpinner2 className="text-white text-3xl animate-spin" />
+          </div>
+        )}
+ <video
+ ref={videoRef}
+ src={`/videos/${product.video}`}
+ autoPlay={!isActive}
+ muted={!isActive}
+ loop
+ preload="metadata"
+ playsInline
+ onCanPlay={() => setIsVideoLoading(false)} // ✅ hide spinner when ready
+ className="absolute top-0 left-0 w-full h-full object-cover"
+ />
+ <button
+ onClick={toggleMute}
+className="absolute top-2 left-2 text-white text-xl bg-opacity-20 p-2 rounded-full z-30"
+ >
+ {isActive ? <FaVolumeMute /> : <FaVolumeUp />}
+</button>
+</div>
+
+ <div className="mt-2">
+ <h3 className="text-xl font-semibold leading-tight">{product.name}</h3>
+
+ {/* Star Rating */}
+ <div className="flex items-center space-x-1 mt-1 mb-1">
+ {[...Array(5)].map((_, i) => (
+ <svg
+ key={i}
+xmlns="http://www.w3.org/2000/svg"
+ fill={i < product.rating ? "currentColor" : "none"}
+ viewBox="0 0 24 24"
+ stroke="currentColor"
+ className={`w-5 h-5 ${i < product.rating ? "text-yellow-400" : "text-gray-300"}`}
+ >
+ <path
+ strokeLinecap="round"
+ strokeLinejoin="round"
+ strokeWidth={2}
+ d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l2.145 6.586h6.92c.969 0 1.371 1.24.588 1.81l-5.607 4.07 2.146 6.586c.3.921-.755 1.688-1.54 1.118L12 18.347l-5.603 4.07c-.784.57-1.838-.197-1.539-1.118l2.145-6.586-5.606-4.07c-.783-.57-.38-1.81.588-1.81h6.919l2.145-6.586z"
+ />
+ </svg>
+ ))}
+ <span className="text-sm text-gray-600 ml-2">{product.rating}.0</span>
+ </div>
+ {/* Discount Price Section */}
+ <div className="mt-2">
+ <div className="inline-block bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded mb-1">
+ Limited time deal
+ </div>
+
+ <div className="flex items-baseline space-x-2 mt-1">
+ <span className="text-red-600 font-semibold text-xl">
+ -{product.discountPercent}%
+ </span>
+ <span className="text-black font-bold text-2xl">
+ ₹{product.price}
+ </span>
+ </div>
+
+ <div className="text-sm text-gray-500 line-through">
+ M.R.P: ₹{product.mrp}
+ </div>
+
+ <div className="text-sm text-gray-700 mt-1">
+ <span className="inline-flex items-center space-x-1">
+ <span className="bg-gray-700 text-white text-xs px-2 py-0.5 rounded">
+ Amazon
+ </span>
+ <span>Inclusive of all taxes</span>
+ </span>
+ </div>
+ </div>
+
+ <i><b><p className="mb-4 mt-2" style={{ color: "green" }}>{product.description}</p></b></i>
+ <a
+ href={product.link}
+ target="_blank"
+ rel="noopener noreferrer"
+ className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 inline-block"
+ >
+ <b><i>Buy Now</i></b>
+ </a>
+ </div>
+ </div>
+ );
+}
+
+
+
+
 
 function Products() {
   const [activeVideoId, setActiveVideoId] = useState(null);
@@ -533,6 +507,8 @@ function About() {
         </div>
       </div>
     </div>
+
+
   );
 }
 
@@ -572,6 +548,14 @@ function Contact() {
   );
 }
 
+function Footer() {
+  return (
+    <footer className="bg-gray-800 text-white text-center p-4 mt-10">
+      <p>&copy; 2025 Amazon Associate.in. All rights reserved.</p>
+<p>Help me earn a small commission when you buy using my affiliate links, at no extra cost to you.</p>
+    </footer>
+  );
+}
 
 
 function App() {
@@ -584,8 +568,11 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
+       <Footer />
     </Router>
   );
 }
+
+
 
 export default App;
