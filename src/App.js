@@ -1,19 +1,23 @@
 import { useContext, useEffect, useState, useRef } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+ import { signInWithPopup, signOut } from "firebase/auth";
 import { FaPlay, FaPause, FaVolumeMute, FaVolumeUp } from "react-icons/fa";
+
 import './App.css';
-import { FaMobileAlt, FaTools, FaUserFriends } from "react-icons/fa";
-import { FaEnvelope, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { Menu, X } from "lucide-react";
-import { HomeIcon, Box, Info, Phone } from "lucide-react";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { FaBars, FaTimes } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
 import { ImSpinner2 } from "react-icons/im";
-import { auth, googleProvider, signInWithPopup, signOut } from "./firebase";
 import { AuthContext, AuthProvider } from "./AuthContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+ import Terms from './pages/Terms';
+import Footer from './components/Footer';
+import Navbar from './components/Navbar';
+import Disclaimer from './pages/Disclaimer';
+import Privacy from './pages/Privacy';
+import Contact from './pages/Contact';
+import About from './pages/About';
+import Home from './pages/Home';
 
 const products = [
   {
@@ -41,10 +45,10 @@ const products = [
       ]
     },
     productSpecifications: {
-      modelName: "Airdopes 311 Pro.",
-      connectivity: "Bluetooth 5.3.",
-      batteryLife: "Up to 50 hours.",
-      chargingTime: "10 mins for 150 mins playtime (ASAP™ Charge).",
+     modelName: "Airdopes 311 Pro.",
+     connectivity: "Bluetooth 5.3.",
+     batteryLife: "Up to 50 hours.",
+  chargingTime: "10 mins for 150 mins playtime (ASAP™ Charge).",
       waterResistance: "IPX4.",
       driverSize: "10mm.",
       latency: "50ms (BEAST™ Mode)."
@@ -66,7 +70,7 @@ const products = [
       brand: "IMNISHNAY.",
       colour: "Jelly Fish.",
       style: "Home Dècor.",
-      speciality: "Colour Changing & Rotoating.",
+speciality: "Colour Changing & Rotating.",
       features: ["🏠 Modern & Minimalist Design: Elegant jellyfish-inspired lamp with floating, moving tentacles, blending seamlessly with any decor.","🌊 Soothing Motion Effect: The soft silicone tentacles sway naturally, creating a gentle, ocean-like movement perfect for relaxation.","💡 Warm LED Light for Cozy Atmosphere: Emits a soft, warm glow that’s easy on the eyes—ideal as a night light, mood lamp, or nursery decor.","🔋 Energy-Efficient & USB-Powered: Safe, low-power consumption with a USB connection, making it eco-friendly and long-lasting.","🎁 Perfect for Baby Room & Gift Idea: A wonderful addition to baby rooms, nurseries, kids' bedrooms, or as a unique gift for ocean lovers and decor enthusiasts"]
     },
     productSpecifications: {
@@ -100,9 +104,9 @@ const products = [
       ModelNumber: "Aera Flexi.",
       Manufacturer: "Aquagenics R&D India Private Limited.",
       ASIN: "B0CB75YYJQ.",
-      ItemTypeName: "Kitchen Tap Extender.",
+    ItemTypeName: "Kitchen Tap Extender.",
       IncludedComponents: "User Manual➡️ Tap Extender➡️Adapter.",
-      ItemHeight: "5.3 Centimeters.",
+     ItemHeight: "5.3 Centimeters.",
       ItemWeight: "160 Grams.",
       PackerContactInformation: "care@waterscience.in",
       UnitCount: "1 Count."
@@ -180,192 +184,9 @@ const products = [
   }
 ];
 
-function Navbar() {
-  const { user } = useContext(AuthContext);
-  const [isOpen, setIsOpen] = useState(false);
-  const [isAuthLoading, setIsAuthLoading] = useState(false);
-  const handleToggle = () => setIsOpen(!isOpen);
-  const handleLinkClick = () => setIsOpen(false);
 
-  const handleSignIn = async () => {
-    setIsAuthLoading(true);
-    try {
-      await signInWithPopup(auth, googleProvider);
-      toast.success("Signed in successfully!");
-    } catch (error) {
-      toast.error(`Sign-in failed: ${error.message}`);
-    } finally {
-      setIsAuthLoading(false);
-    }
-  };
 
-  const handleSignOut = async () => {
-    setIsAuthLoading(true);
-    try {
-      await signOut(auth);
-      toast.success("Signed out successfully!");
-    } catch (error) {
-      toast.error(`Sign-out failed: ${error.message}`);
-    } finally {
-      setIsAuthLoading(false);
-    }
-  };
 
-  // Default placeholder image URL
-  const defaultProfilePic = "https://via.placeholder.com/40?text=User";
-
-  return (
-    <>
-      <div className="fixed top-4 right-4 z-50 md:hidden bg-gray-800 p-2 rounded-full shadow-lg">
-        <button onClick={handleToggle} className="text-white" aria-label={isOpen ? "Close menu" : "Open menu"}>
-          {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-        </button>
-      </div>
-
-      <nav className="bg-gray-800 text-white p-4">
-        <div className="flex justify-between items-center">
-          <h1 className="text-xl font-bold">Amazon Associate.in</h1>
-
-          <div className="hidden md:flex space-x-4 items-center">
-            <Link to="/" className="hover:text-gray-300">Home</Link>
-            <Link to="/products" className="hover:text-gray-300">Products</Link>
-            <Link to="/about" className="hover:text-gray-300">About</Link>
-            <Link to="/contact" className="hover:text-gray-300">Contact</Link>
-            {user ? (
-              <div className="flex items-center space-x-2">
-                <img
-                  src={user.photoURL || defaultProfilePic}
-                  alt="User profile"
-                  className="w-8 h-8 rounded-full"
-                  onError={(e) => (e.target.src = defaultProfilePic)} // Fallback on error
-                />
-                <span>{user.displayName || "User"}</span>
-                <button
-                  onClick={handleSignOut}
-                  disabled={isAuthLoading}
-                  className={`bg-red-600 px-3 py-1 rounded hover:bg-red-700 flex items-center space-x-2 ${isAuthLoading ? "opacity-50 cursor-not-allowed" : ""}`}
-                >
-                  {isAuthLoading ? <ImSpinner2 className="animate-spin" /> : "Sign Out"}
-                </button>
-              </div>
-            ) : (
-              <button
-                onClick={handleSignIn}
-                disabled={isAuthLoading}
-                className={`bg-blue-600 px-3 py-1 rounded hover:bg-blue-700 flex items-center space-x-2 ${isAuthLoading ? "opacity-50 cursor-not-allowed" : ""}`}
-              >
-                {isAuthLoading ? <ImSpinner2 className="animate-spin" /> : "Sign In with Google"}
-              </button>
-            )}
-          </div>
-        </div>
-      </nav>
-
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ x: "-100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "-100%" }}
-            transition={{ type: "tween", duration: 0.3 }}
-            className="fixed top-0 left-0 h-full w-3/4 bg-black bg-opacity-50 text-white z-40 flex flex-col p-6 space-y-4 md:hidden shadow-xl text-center font-bold text-2xl"
-          >
-            <Link to="/" onClick={handleLinkClick} className="hover:text-gray-300">🛖 Home</Link>
-            <Link to="/products" onClick={handleLinkClick} className="hover:text-gray-300">📦 Product</Link>
-            <Link to="/about" onClick={handleLinkClick} className="hover:text-gray-300">❗ About</Link>
-            <Link to="/contact" onClick={handleLinkClick} className="hover:text-gray-300">📞 Contact</Link>
-            {user ? (
-              <div className="flex flex-col items-center space-y-2">
-                <img
-                  src={user.photoURL || defaultProfilePic}
-                  alt="User profile"
-                  className="w-10 h-10 rounded-full"
-                  onError={(e) => (e.target.src = defaultProfilePic)} // Fallback on error
-                />
-                <span>{user.displayName || "User"}</span>
-                <button
-                  onClick={handleSignOut}
-                  disabled={isAuthLoading}
-                  className={`bg-red-600 px-4 py-2 rounded hover:bg-red-700 flex items-center space-x-2 ${isAuthLoading ? "opacity-50 cursor-not-allowed" : ""}`}
-                >
-                  {isAuthLoading ? <ImSpinner2 className="animate-spin" /> : "Sign Out"}
-                </button>
-              </div>
-            ) : (
-              <button
-                onClick={handleSignIn}
-                disabled={isAuthLoading}
-                className={`bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 flex items-center space-x-2 ${isAuthLoading ? "opacity-50 cursor-not-allowed" : ""}`}
-              >
-                {isAuthLoading ? <ImSpinner2 className="animate-spin" /> : "Sign In with Google"}
-              </button>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
-  );
-}
-
-function Home() {
-  return (
-    <div className="p-8 text-center bg-gradient-to-r from-yellow-50 to-orange-100 min-h-screen">
-      <div className="max-w-4xl mx-auto py-10">
-        <h1 className="text-4xl font-bold mb-4 text-gray-800">
-          🔥Top Amazon Picks Just for You🏷!
-        </h1>
-        <p className="text-lg text-gray-700 mb-6 italic" style={{ fontStyle: 'italic', letterSpacing: '2px' }}>
-          At Amazon Associate.in, we handpick the best mobile accessories📱 and home gadgets to help you save time⏳ and money.💸 Our curated selection includes trending tech like the boAt Airdopes 311 Pro🎧, which offers exceptional sound quality🎶 and up to 20 hours of battery🔋 life—perfect for music lovers on the go🔥. We also feature innovative💡 home solutions like the WaterScience Tap Extension🚰, designed to save up to 50% water🫧 with its dual flow modes. Each product🏷 is chosen based on customer reviews📉, quality, and value, ensuring you get the best deals with discounts➡️-
-          <span className="font-semibold text-green-600">Up to 85% off!</span>
-        </p>
-        <Link
-          to="/products"
-          className="bg-blue-600 text-white px-6 py-3 rounded-full text-lg hover:bg-blue-700 transition"
-        >
-          Explore Products
-        </Link>
-      </div>
-
-      <div className="mt-10 grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {products.slice(0, 3).map((product) => (
-          <div
-            key={product.id}
-            className="border rounded-lg p-4 bg-white shadow hover:shadow-lg transition duration-300"
-          >
-            <video
-              src={`/videos/${product.video}`}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-48 object-contain rounded"
-            />
-            <h3 className="mt-2 text-lg font-semibold">{product.name}</h3>
-            <p className="text-sm text-gray-600 mt-1" style={{ letterSpacing: '2px' }}>Why we love it: {product.description}...</p>
-            <span className="text-red-600 font-bold text-lg block mt-1">
-              ₹{product.price} <span className="text-sm line-through text-gray-500">₹{product.mrp}</span>
-            </span>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-12 grid md:grid-cols-3 gap-4 max-w-4xl mx-auto text-gray-700">
-        <div className="p-4 border rounded-lg bg-white shadow text-center">
-          <h4 className="font-bold text-xl">Fast Delivery</h4>
-          <p className="text-sm" style={{ letterSpacing: '2px' }}>Get your products in 2-4 days via Amazon Prime lightning-fast shipping.</p>
-        </div>
-        <div className="p-4 border rounded-lg bg-white shadow text-center">
-          <h4 className="font-bold text-xl">Up to 85% OFF</h4>
-          <p className="text-sm" style={{ letterSpacing: '2px' }}>Enjoy massive discounts on handpicked items, curated for quality and value.</p>
-        </div>
-        <div className="p-4 border rounded-lg bg-white shadow text-center">
-          <h4 className="font-bold text-xl">Amazon Verified</h4>
-          <p className="text-sm" style={{ letterSpacing: '2px' }}>All links redirect to trusted Amazon listings for a secure shopping experience.</p>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function ProductCard({ product, isActive, onActivate }) {
   const videoRef = useRef(null);
@@ -401,9 +222,9 @@ function ProductCard({ product, isActive, onActivate }) {
   }, []);
 
   return (
-    <div className="border rounded-lg p-4 shadow hover:shadow-lg relative">
+    <div className="border rounded-lg p-4 shadow hover:shadow-lg relative text-white">
       <div
-        className="w-full bg-black overflow-hidden relative"
+        className="w-full bg-black overflow-hidden relative text-white"
         style={{ aspectRatio: aspectRatio }}
       >
         {isVideoLoading && (
@@ -464,12 +285,12 @@ function ProductCard({ product, isActive, onActivate }) {
             <span className="text-red-600 font-semibold text-xl">
               -{product.discountPercent}%
             </span>
-            <span className="text-black font-bold text-2xl">
+          <span className="text-green-500 font-bold text-3xl">
               ₹{product.price}
             </span>
           </div>
 
-          <div className="text-sm text-gray-500 line-through">
+          <div className="text-sm text-white line-through">
             M.R.P: ₹{product.mrp}
           </div>
 
@@ -478,24 +299,24 @@ function ProductCard({ product, isActive, onActivate }) {
               <span className="bg-gray-700 text-white text-xs px-2 py-0.5 rounded">
                 Amazon
               </span>
-              <span>Inclusive of all taxes</span>
+ <span className="text-red-600">Inclusive of all taxes</span>
             </span>
           </div>
         </div>
 
-        <i><b><p className="mb-4 mt-2" style={{ color: "black", letterSpacing: "2px" }}>{product.description}</p></b></i>
+        <i><b><p className="mb-4 mt-2" style={{ color: "white", letterSpacing: "2px" }}>{product.description}</p></b></i>
 
         {product.topHighlights && (
           <div className="mt-4">
             <button
               onClick={() => setIsHighlightsOpen(!isHighlightsOpen)}
-              className="flex justify-between items-center w-full text-left text-lg font-semibold text-gray-800"
+              className="flex justify-between items-center w-full text-left text-lg font-semibold text-white"
             >
               Top Highlights
               {isHighlightsOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
             </button>
             {isHighlightsOpen && (
-              <div className="mt-2 text-sm text-gray-700">
+              <div className="mt-2 text-sm text-white">
                 {product.topHighlights.brand && (
                   <p><strong>Brand:</strong> {product.topHighlights.brand}</p>
                 )}
@@ -536,13 +357,13 @@ function ProductCard({ product, isActive, onActivate }) {
           <div className="mt-4">
             <button
               onClick={() => setIsSpecsOpen(!isSpecsOpen)}
-              className="flex justify-between items-center w-full text-left text-lg font-semibold text-gray-800"
+              className="flex justify-between items-center w-full text-left text-lg font-semibold text-white"
             >
               Product Specifications
               {isSpecsOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
             </button>
             {isSpecsOpen && (
-              <div className="mt-2 text-sm text-gray-700">
+           <div className="mt-2 text-sm text-white">
                 {Object.entries(product.productSpecifications).map(([key, value]) => (
                   <p key={key}>
                     <strong>{key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}:</strong> {value}
@@ -571,7 +392,7 @@ function Products() {
 
   return (
     <div className="p-8">
-      <h1 className="text-2xl font-bold mb-6">Featured Products</h1>
+ <h1 className="text-4xl font-bold mb-6 text-green-500 text-center">Trending Products🔥</h1>
       <div className="grid md:grid-cols-3 gap-6">
         {products.map((product) => (
           <ProductCard
@@ -586,76 +407,6 @@ function Products() {
   );
 }
 
-function About() {
-  return (
-    <div className="p-8 bg-gradient-to-br from-yellow-50 to-orange-100 min-h-screen">
-      <div className="max-w-4xl mx-auto text-center">
-        <h1 className="text-4xl font-bold text-gray-800 mb-6">About Us</h1>
-        <p className="text-lg text-gray-700 mb-8" style={{ letterSpacing: '1px' }}>
-          At Amazon Associate.in, we’re on a mission to make online shopping smarter and more affordable. Founded in 2025, our team is passionate about finding the best deals on mobile accessories, smart home gadgets, and everyday essentials. We spend hours researching products, analyzing customer reviews, and testing items to ensure you get the highest quality at the best price. Whether you’re looking for a new pair of earbuds like the boAt Airdopes 311 Pro or a practical solution like the WaterScience Tap Extension, we’ve got you covered. Our affiliate links help us earn a small commission—at no extra cost to you—while connecting you to trusted Amazon listings. Join our community and start saving today!
-        </p>
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="p-6 bg-white shadow rounded-lg flex flex-col items-center text-center">
-            <FaMobileAlt className="text-3xl text-blue-500 mb-2" />
-            <h2 className="font-bold text-xl mb-1">Mobile Accessories</h2>
-            <p className="text-sm text-gray-600" style={{ letterSpacing: '3px' }}>We carefully select mobile gadgets like earbuds, chargers, and cases that are both affordable and highly rated by thousands of users.</p>
-          </div>
-          <div className="p-6 bg-white shadow rounded-lg flex flex-col items-center text-center">
-            <FaTools className="text-3xl text-green-500 mb-2" />
-            <h3 className="font-bold text-xl mb-1">Smart Utilities</h3>
-            <p className="text-sm text-gray-600" style={{ letterSpacing: '3px' }}>Innovative tools and home improvements that make life easier With Energy-saving solutions and smart devices for a seamless home experience.</p>
-          </div>
-          <div className="p-6 bg-white shadow rounded-lg flex flex-col items-center text-center">
-            <FaUserFriends className="text-3xl text-purple-500 mb-2" />
-            <h4 className="font-bold text-xl mb-1">Trusted Reviews</h4>
-            <p className="text-sm text-gray-600" style={{ letterSpacing: '3px' }}>Handpicked based on ratings, reviews & real customer satisfaction with Curated ratings and reviews you can rely on for smarter choices.</p>
-            <p className="text-sm text-gray-600">Over 10,000 verified user reviews.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Contact() {
-  return (
-    <div className="p-8 bg-gradient-to-br from-blue-50 to-cyan-100 min-h-screen">
-      <div className="max-w-xl mx-auto text-center">
-        <h2 className="text-4xl font-bold text-gray-800 mb-6">Get in Touch</h2>
-        <p className="text-lg text-gray-700 mb-8 text-2xl" style={{ letterSpacing: '4px' }}>
-          We’re here to help with any questions about our products or deals. Reach out to us via email, Instagram, or WhatsApp, and we’ll get back to you within 24 hours. Let’s find the perfect products together!
-        </p>
-        <div className="space-y-4">
-          <div className="flex items-center justify-center gap-3">
-            <FaEnvelope className="text-xl text-red-500" />
-            <a href="mailto:outlookdeathless@email.com" className="text-gray-700 text-lg hover:underline">
-              outlookdeathless@email.com
-            </a>
-          </div>
-          <div className="flex items-center justify-center gap-3">
-            <FaInstagram className="text-xl text-pink-500" />
-            <a href="https://www.instagram.com/night0__0owl" target="_blank" rel="noreferrer" className="text-gray-700 text-lg hover:underline">
-              @night0__0owl
-            </a>
-          </div>
-          <div className="flex items-center justify-center gap-3">
-            <FaWhatsapp className="text-xl text-green-500" />
-            <span className="text-gray-700 text-lg">+91-9547104771</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="bg-gray-800 text-white text-center p-4 mt-10">
-      <p>© 2025 Amazon Associate.in. All rights reserved.</p>
-      <p>Help me earn a small commission when you buy using my affiliate links, at no extra cost to you.</p>
-    </footer>
-  );
-}
 
 function App() {
   const { user, loading } = useContext(AuthContext);
@@ -691,13 +442,18 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+<Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+     <Route path="/privacy"
+     element={<Privacy />} />
+     <Route path="/terms"
+     element={<Terms />} />
+     <Route path="/disclaimer"
+     element={<Disclaimer />} />
       </Routes>
       <Footer />
-      <ToastContainer position="top-right" autoClose={3000} />
     </Router>
   );
 }
@@ -706,6 +462,7 @@ export default function RootApp() {
   return (
     <AuthProvider>
       <App />
+      <ToastContainer position="top-right" autoClose={2000} />
     </AuthProvider>
   );
 }

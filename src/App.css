@@ -6,6 +6,7 @@
 }
 body{
   font-style: italic;
+  background-color: #0f172a; /* Tailwind's slate-900 or similar dark */
 }
 
 .App-logo {
