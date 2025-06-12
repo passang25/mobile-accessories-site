@@ -1,4 +1,6 @@
 import { useContext, useEffect, useState, useRef } from "react";
+import { auth, googleProvider } from "./firebase";
+
  import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
  import { signInWithPopup, signOut } from "firebase/auth";
 import { FaPlay, FaPause, FaVolumeMute, FaVolumeUp } from "react-icons/fa";

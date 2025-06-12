@@ -1,11 +1,12 @@
 // firebase.js
 import { initializeApp } from "firebase/app";
 import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut
+ getAuth,
+GoogleAuthProvider,
+ signInWithPopup,
+ signOut
 } from "firebase/auth";
+
 
 // Firebase configuration from Firebase Console
 const firebaseConfig = {
