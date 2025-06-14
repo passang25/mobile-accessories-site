@@ -110,7 +110,7 @@ aria-label={isOpen ? "Close menu" : "Open menu"}
  animate={{ x: 0 }}
  exit={{ x: "-100%" }}
  transition={{ type: "tween", duration: 0.3 }}
- className="fixed top-0 left-0 w-1/2 h-full bg-black bg-opacity-90 text-white z-40 flex flex-col p-6 space-y-4 md:hidden text-center font-bold text-xl"
+className="fixed top-0 left-0 w-1/2 h-full bg-black bg-opacity-95 text-white z-50 flex flex-col p-6 space-y-4 md:hidden text-center font-bold text-xl overflow-y-auto pt-16 pb-28"
  >
 <Link to="/" onClick={handleLinkClick} className="hover:text-gray-300">🏠 Home</Link>
  <Link to="/products" onClick={handleLinkClick} className="hover:text-gray-300">📦 Products</Link>

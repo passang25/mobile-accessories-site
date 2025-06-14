@@ -1,10 +1,10 @@
+import React from 'react';
 import { useContext, useEffect, useState, useRef } from "react";
 import { auth, googleProvider } from "./firebase";
-
+import '@fortawesome/fontawesome-free/css/all.min.css';
  import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
  import { signInWithPopup, signOut } from "firebase/auth";
 import { FaPlay, FaPause, FaVolumeMute, FaVolumeUp } from "react-icons/fa";
-
 import './App.css';
 import { Menu, X } from "lucide-react";
 import { ChevronDown, ChevronUp } from "lucide-react";
@@ -20,6 +20,7 @@ import Privacy from './pages/Privacy';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import Home from './pages/Home';
+import CategoryPage from './pages/CategoryPage';
 
 const products = [
   {
@@ -445,6 +446,7 @@ function App() {
       <Navbar />
       <Routes>
 <Route path="/" element={<Home />} />
+<Route path="/category/:name" element={<CategoryPage />} />
         <Route path="/products" element={<Products />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
