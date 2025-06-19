@@ -8,7 +8,7 @@ const allProducts = [
   name: 'Òñé Píèçë wátçh',
   price: '₹1,999',
   category: 'Anime',
-  image: './images/Anime-watch.jpg'
+  image: './Images/Anime-watch.jpg'
   },
   { id: 2, name: 'Smart Watch', price: '₹3,499', category: 'Watch', image: 'https://via.placeholder.com/300x300' },
   { id: 3, name: 'Laptop Sleeve', price: '₹999', category: 'Accessories', image: 'https://via.placeholder.com/300x300' },

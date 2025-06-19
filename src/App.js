@@ -21,6 +21,8 @@ import Contact from './pages/Contact';
 import About from './pages/About';
 import Home from './pages/Home';
 import CategoryPage from './pages/CategoryPage';
+import Wishlist from './pages/Wishlist';
+import Cart from './pages/Cart';
 
 const products = [
   {
@@ -447,7 +449,12 @@ function App() {
       <Routes>
 <Route path="/" element={<Home />} />
 <Route path="/category/:name" element={<CategoryPage />} />
-        <Route path="/products" element={<Products />} />
+<Route path="/wishlist"
+element={<Wishlist />} />
+<Route path="/cart" 
+element={<Cart />} />
+<Route path="/products" 
+element={<Products />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
      <Route path="/privacy"
