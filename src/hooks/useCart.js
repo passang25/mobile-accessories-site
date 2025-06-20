@@ -1,7 +1,6 @@
 // src/hooks/useCart.js
 import { useEffect, useState } from 'react';
 import { db, auth } from '../firebase';
-
 // Inside useCart.js
 import { doc, setDoc, deleteDoc, onSnapshot, collection, getDocs } from 'firebase/firestore';
 // ... other imports
@@ -18,6 +17,8 @@ const useCart = () => {
       const items = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setCartItems(items);
     });
+const cartCount = cartItems?.length || 0;
+
 
     return () => unsubscribe();
   }, []);
@@ -55,7 +56,7 @@ const useCart = () => {
   const isInCart = (productId) => {
     return cartItems.some(item => item.id === productId.toString());
   };
-
+const cartCount = cartItems?.length || 0;
   return {
     cartItems,
     addToCart,
@@ -63,6 +64,7 @@ const useCart = () => {
     removeFromCart,
     clearCart,
     isInCart,
+    cartCount, 
   };
 };
 

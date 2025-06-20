@@ -24,6 +24,7 @@ import CategoryPage from './pages/CategoryPage';
 import Wishlist from './pages/Wishlist';
 import Cart from './pages/Cart';
 import ProductDetails from './pages/ProductDetails';
+import RequireAuth from './components/RequireAuth';
 
 const products = [
   {
@@ -451,10 +452,22 @@ function App() {
 <Route path="/" element={<Home />} />
 <Route path="/product/:id" element={<ProductDetails />} />
 <Route path="/category/:name" element={<CategoryPage />} />
-<Route path="/wishlist"
-element={<Wishlist />} />
-<Route path="/cart" 
-element={<Cart />} />
+<Route
+  path="/wishlist"
+  element={
+    <RequireAuth>
+      <Wishlist />
+    </RequireAuth>
+  }
+/>
+<Route
+ path="/cart"
+  element={
+    <RequireAuth>
+      <Cart />
+    </RequireAuth>
+  }
+/>
 <Route path="/products" 
 element={<Products />} />
         <Route path="/about" element={<About />} />

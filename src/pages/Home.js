@@ -13,6 +13,8 @@ export default function Home() {
   const navigate = useNavigate();
   const { toggleWishlist, isInWishlist } = useWishlist();
 const { addToCart, isInCart } = useCart();
+const { cartCount } = useCart();
+
 
   const handleAddToCart = (product) => {
     console.log('Added to cart:', product);
@@ -152,6 +154,11 @@ className="flex flex-col items-center justify-center focus:outline-none"
  >
  <i className="fas fa-shopping-cart text-lg"></i>
  <span className="text-xs">Cart</span>
+  {cartCount > 0 && (
+  <span className="absolute top-0 right-21 -translate-y-1 translate-x-1 text-red-500">
+      {cartCount}
+    </span>
+  )}
  </button>
 
  <button
