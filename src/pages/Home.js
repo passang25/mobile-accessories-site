@@ -3,51 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import useWishlist from '../hooks/useWishlist';
 import useCart from '../hooks/useCart';
+import products from '../data/products';
 
-const products = [
-  {
-    id: 1,
-    name: 'One Piece Watch',
-    price: '₹1,999',
-    image: './Images/Anime-watch.jpg',
-  },
-  {
-    id: 2,
-    name: 'Smart Watch',
-    price: '₹3,499',
-    image: 'https://via.placeholder.com/300x300',
-  },
-  {
-    id: 3,
-    name: 'Gaming Headset',
-    price: '₹2,999',
-    image: 'https://via.placeholder.com/300x300',
-  },
-  {
-    id: 4,
-    name: 'Anime Poster',
-    price: '₹299',
-    image: 'https://via.placeholder.com/300x300',
-  },
-  {
-    id: 5,
-    name: 'Wall Clock',
-    price: '₹299',
-    image: 'https://via.placeholder.com/300x300',
-  },
-  {
-    id: 6,
-    name: 'Room Light',
-    price: '₹299',
-    image: 'https://via.placeholder.com/300x300',
-  },
-  {
-    id: 7,
-    name: 'Mobile Cover',
-    price: '₹299',
-    image: 'https://via.placeholder.com/300x300',
-  },
-];
 
 
 const categories = ['Anime', 'Watch', 'Accessories', 'Wearables'];
@@ -97,8 +54,8 @@ const { addToCart, isInCart } = useCart();
             {categories.map((cat, index) => (
               <div
                 key={index}
-                onClick={() => navigate(`/category/${cat}`)}
-                className="bg-white shadow rounded-lg px-4 py-2 min-w-[120px] text-center hover:bg-indigo-100 cursor-pointer"
+  onClick={() => navigate(`/category/${cat}`)}
+ className="bg-white shadow rounded-lg px-4 py-2 min-w-[120px] text-center hover:bg-indigo-100 cursor-pointer"
               >
                 {cat}
               </div>
@@ -113,10 +70,11 @@ const { addToCart, isInCart } = useCart();
 </h3>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {products.map((product) => (
-              <div
-                key={product.id}
-                className="bg-white rounded-lg shadow hover:shadow-lg hover:scale-[1.03] transition-transform p-4"
+    {products.map((product) => (
+      <div
+      key={product.id}
+onClick={() => navigate(`/product/${product.id}`)}
+className="bg-white rounded-lg shadow hover:shadow-lg hover:scale-[1.03] transition-transform p-4 cursor-pointer"
               >
     <div className="relative">
      <img
@@ -126,25 +84,21 @@ const { addToCart, isInCart } = useCart();
     className="w-full h-60 object-cover rounded bg-gray-100"
     onError={(e) => {
   e.target.src = 'https://via.placeholder.com/300x300';
-                    }}
-                  />
+           }}
+      />
       {/* ❤️ Wishlist Button */}
     <button
- onClick={() => toggleWishlist(product)}
- className={`absolute top-2 right-2 bg-white rounded-full p-2 shadow text-red-500 z-10 transition-transform duration-200 ${
- isInWishlist(product.id) ? 'scale-110' : 'scale-100'
- }`}
->
-
-{isInWishlist(product.id) ? (
-<FaHeart className="w-5 h-5" />
-        ) : (
- <FaRegHeart className="w-5 h-5" />
-                    )}
-                  </button>
+onClick={(e) => {
+ e.stopPropagation(); // prevent nav
+ toggleWishlist(product);
+ }}
+ className="absolute top-2 right-2 bg-white rounded-full p-2 shadow text-red-500 z-10"
+ >
+ {isInWishlist(product.id) ? <FaHeart className="w-5 h-5" /> : <FaRegHeart className="w-5 h-5" />}
+ </button>
                 </div>
 
-                <h4 className="text-md font-semibold mt-2">{product.name}</h4>
+<h4 className="text-md font-semibold mt-2">{product.name}</h4>
   <p className="text-indigo-600 font-bold">{product.price}</p>
   <div className="flex items-center gap-1 text-yellow-400 text-sm mt-1">
  <i className="fas fa-star"></i>
@@ -155,19 +109,18 @@ const { addToCart, isInCart } = useCart();
  <span className="ml-1 text-gray-500">(120)</span>
 </div>
 
-  <button
-className={`mt-2 w-full ${
-isInCart(product.id)
- ? 'bg-gray-400 text-white cursor-not-allowed'
- : 'bg-indigo-600 text-white hover:bg-indigo-700'
- } py-1 rounded transition`}
-onClick={() => !isInCart(product.id) && addToCart(product)}
-disabled={isInCart(product.id)}
->
+  {/* 🛒 Add to Cart */}
+ <button
+onClick={(e) => {
+e.stopPropagation(); // prevent nav
+addToCart(product);
+ }}
+className={`mt-2 w-full py-1 rounded text-white ${
+isInCart(product.id) ? 'bg-green-600 hover:bg-green-700' : 'bg-indigo-600 hover:bg-indigo-700'
+ }`}
+ >
  {isInCart(product.id) ? 'In Cart' : 'Add to Cart'}
-</button>
-
-  
+ </button>
               </div>
             ))}
           </div>

@@ -23,6 +23,7 @@ import Home from './pages/Home';
 import CategoryPage from './pages/CategoryPage';
 import Wishlist from './pages/Wishlist';
 import Cart from './pages/Cart';
+import ProductDetails from './pages/ProductDetails';
 
 const products = [
   {
@@ -448,6 +449,7 @@ function App() {
       <Navbar />
       <Routes>
 <Route path="/" element={<Home />} />
+<Route path="/product/:id" element={<ProductDetails />} />
 <Route path="/category/:name" element={<CategoryPage />} />
 <Route path="/wishlist"
 element={<Wishlist />} />
