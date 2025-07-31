@@ -1,13 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.App {
-  text-align: center;
-}
+
+/* App.css or index.css */
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+
+
+
 body{
   font-style: italic;
   background-color: #0f172a;
-  -webkit-overflow-scrolling: touch;
+  {/*overscroll-behavior: none;*/}
   /* Tailwind's slate-900 or similar dark */
 }
 
@@ -46,9 +51,13 @@ body{
   }
 }
 scrollbar::-webkit-scrollbar {
-color:blue;
+color:red;
 }
 scrollbar {
   color: blue;
 }
+
+
+
+
 
